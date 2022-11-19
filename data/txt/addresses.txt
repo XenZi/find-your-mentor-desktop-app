@@ -1,0 +1,7 @@
+1|Vinogradarska|123|Aleksandrovac|Srbija|True
+2|Vinogradarska|7|Aleksandrovac|Srbija|True
+3|Saskinaaaaaa Ulica|11|Novi Sad|Srbija|True
+4|Nova Ulica|11|Aleksandrovac|Srbija|True
+5|Vladicina|33|Trstenik|Trstenik|True
+6|Radina Ulica|33|Aleksandrovac|Srbija|False
+7|Mikicina Ulica|17|Ljubinci|Srbija|True

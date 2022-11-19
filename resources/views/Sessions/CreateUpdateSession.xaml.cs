@@ -1,0 +1,91 @@
+﻿using SR38_2021_POP2022.resources.enums;
+using SR38_2021_POP2022.resources.models;
+using SR38_2021_POP2022.resources.services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace SR38_2021_POP2022.resources.views.Sessions
+{
+    /// <summary>
+    /// Interaction logic for CreateUpdateSession.xaml
+    /// </summary>
+    public partial class CreateUpdateSession : Window
+    {
+        private EWindowStatus status;
+        private Session session;
+        private SessionService service;
+        private TeacherService teacherService;
+        public CreateUpdateSession(EWindowStatus status, Session session = null)
+        {
+            InitializeComponent();
+            this.status = status;
+            this.session = session;
+            InitializeData();
+            datePicker.DisplayDateStart = DateTime.Today;
+            MakeWindowChangesBasedByStatus();
+            InitializeTextBoxValues();
+        }
+
+        private void InitializeData()
+        {
+            service = new SessionService();
+            teacherService = new TeacherService();
+            cmbTeacher.ItemsSource = teacherService.GetAllTeachers();
+
+        }
+        private void MakeWindowChangesBasedByStatus()
+        {
+            if (status.Equals(EWindowStatus.CREATE))
+            {
+                this.Title = "Create new session";
+                btnSubmit.Content = "Create";
+            }
+            else
+            {
+                this.Title = "Update current session";
+                btnSubmit.Content = "Update";
+            }
+        }
+
+        private void InitializeTextBoxValues()
+        {
+            if (session == null)
+            {
+                return;
+            }
+            txtClassLength.Text = session.ClassLength.ToString();
+            txtStartingTime.Text = session.StartingTime;
+        }
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if (status.Equals(EWindowStatus.CREATE))
+            {
+                CreateNewSession();
+            }
+            else
+            {
+                UpdateSession();
+            }
+        }
+
+        private void CreateNewSession()
+        {
+        }
+
+        private void UpdateSession()
+        {
+        }
+    }
+}

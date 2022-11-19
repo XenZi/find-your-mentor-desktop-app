@@ -1,0 +1,3 @@
+123123|Mateja|Rilak|rilaktest@gmail.com|password|1|1|1||True
+123123123132|Saska|Saskovic|saskasaskovic@saska.com|saska123|1|0|3||True
+1231231|ttt|ttt|ttt@gmail.com|ttt123|1|1|2||True

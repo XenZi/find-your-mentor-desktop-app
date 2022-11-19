@@ -1,0 +1,8 @@
+0|Srpski|true
+1|Engleski|true
+2|Nemacki|True
+3|Testtt|False
+4|Novii|False
+5|Japanski|True
+6|Turski|False
+7|Madjarski|True
