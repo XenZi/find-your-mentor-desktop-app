@@ -66,6 +66,7 @@ namespace SR38_2021_POP2022.resources.views.Addresses
             if (status.Equals(EWindowStatus.CREATE))
             {
                 CreateNewAddress();
+                this.DialogResult = true;
             }
             else
             {

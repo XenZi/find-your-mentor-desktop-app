@@ -146,6 +146,12 @@
     <Compile Include="resources\views\Sessions\SessionsWindow.xaml.cs">
       <DependentUpon>SessionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="resources\views\Students\CreateUpdateStudentWindow.xaml.cs">
+      <DependentUpon>CreateUpdateStudentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="resources\views\Teachers\CreateUpdateTeacher.xaml.cs">
+      <DependentUpon>CreateUpdateTeacher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="utilities\CheckForPersonalIdentityDuplicates.cs" />
     <Compile Include="utilities\exceptions\AddressNotFoundException.cs" />
     <Compile Include="utilities\exceptions\LanguageNotFoundException.cs" />
@@ -160,7 +166,6 @@
     <Compile Include="utilities\file-related-utilities\file-formatters\FileStudentFormatter.cs" />
     <Compile Include="utilities\file-related-utilities\file-formatters\FileTeacherFormatter.cs" />
     <Compile Include="utilities\file-related-utilities\FileHandler.cs" />
-    <Compile Include="utilities\fill-data-grid\FillDataGrid.cs" />
     <Compile Include="utilities\IDGenerator.cs" />
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +224,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\views\Sessions\SessionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\views\Students\CreateUpdateStudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\views\Teachers\CreateUpdateTeacher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
 ﻿using SR38_2021_POP2022.resources.models;
+using SR38_2021_POP2022.utilities.exceptions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,15 +27,15 @@ namespace SR38_2021_POP2022.resources.managers
 
         public Student GetStudentByIdentityNumber(string number)
         {
-            try
+            Student student = allStudents.ToList().Find(x => x.PersonalIdentityNumber == number);
+
+            if (student == null)
             {
-                Student student = allStudents.ToList().Find(x => x.PersonalIdentityNumber == number);
-                return student;
+                throw new UserNotFoundException("Student not found");
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return student;
+
         }
     }
 }

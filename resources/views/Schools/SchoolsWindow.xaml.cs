@@ -45,6 +45,10 @@ namespace SR38_2021_POP2022.resources.views.Schools
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             CreateUpdateSchoolWindow cusw = new CreateUpdateSchoolWindow(EWindowStatus.CREATE);
+            if(cusw.ShowDialog() == true)
+            {
+                view.Refresh();
+            }
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -70,7 +74,5 @@ namespace SR38_2021_POP2022.resources.views.Schools
             service.Delete(school.Id);
             view.Refresh();
         }
-
-
     }
 }

@@ -34,6 +34,10 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
         
+        public Student FindByID(string id)
+        {
+            return StudentManager.GetInstance().GetStudentByIdentityNumber(id);
+        }
         public Student FindByPersonalIDAndPassword(string personalID, string password)
         {
             Student a = (Student)StudentManager.GetInstance().AllStudents.ToList().Find(student => student.PersonalIdentityNumber == personalID && student.Password == password);
@@ -42,7 +46,7 @@ namespace SR38_2021_POP2022.resources.services
 
         public ObservableCollection<Student> GetAllStudents()
         {
-            return StudentManager.GetInstance().AllStudents;
+            return new ObservableCollection<Student>(StudentManager.GetInstance().AllStudents.Where(x => x.Active));
         }
         public void CreateStudent(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string streetName, int streetNumber, string cityName, string country)
         {
@@ -56,12 +60,19 @@ namespace SR38_2021_POP2022.resources.services
             repository.Create(firstName, lastName, personalIdentityNumber, email, password, userType, genderType, true, enteredAddress, new List<Session>());
         }
 
-        private void UpdateStudent(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string address, int[] sessionIDs)
+        public void UpdateStudent(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string streetName, int streetNumber, string cityName, string country)
         {
-            repository.Update(firstName, lastName, personalIdentityNumber, email, password, userType, genderType, true, AddressManager.GetInstance().GetAddressByStreetName(address), SessionManager.GetInstance().GetSessionsBasedByID(sessionIDs).ToList());
+            Address enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+
+            if (enteredAddress == null)
+            {
+                addressService.CreateAddress(streetName, streetNumber, cityName, country);
+                enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+            }
+            repository.Update(firstName, lastName, personalIdentityNumber, email, password, userType, genderType, true, enteredAddress, FindByID(personalIdentityNumber).ReservedSessions);
         }
 
-        private void DeleteStudent(string personalIdentityNumber)
+        public void DeleteStudent(string personalIdentityNumber)
         {
             repository.Delete(personalIdentityNumber);
         }

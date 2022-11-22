@@ -40,7 +40,10 @@ namespace SR38_2021_POP2022.resources.views.Addresses
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             CreateUpdateAddressWindow cuaw = new CreateUpdateAddressWindow(EWindowStatus.CREATE);
-            cuaw.Show();
+            if (cuaw.ShowDialog() == true)
+            {
+                view.Refresh();
+            }
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)

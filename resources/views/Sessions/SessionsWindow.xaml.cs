@@ -36,7 +36,10 @@ namespace SR38_2021_POP2022.resources.views.Sessions
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             CreateUpdateSession cus = new CreateUpdateSession(enums.EWindowStatus.CREATE);
-            cus.Show();
+            if (cus.ShowDialog() == true)
+            {
+                view.Refresh();
+            }
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)

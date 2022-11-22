@@ -46,7 +46,7 @@ namespace SR38_2021_POP2022.resources.models
 
         public override string ToString()
         {
-            return String.Format("Ime skole:{0}, i jezici: {1}", Name, AllLanguages.ToString());
+            return String.Format($"{this.Name}");
         }
     }
 }

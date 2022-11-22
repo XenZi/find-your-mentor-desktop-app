@@ -28,6 +28,53 @@ namespace SR38_2021_POP2022.resources.models
         public List<Language> TeachingLanguages { get => teachingLanguages; set { teachingLanguages = value; OnPropertyChanged("workingSchool"); } }
         public List<Session> Sessions { get => sessions; set { sessions = value; OnPropertyChanged("workingSchool"); } }
 
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; OnPropertyChanged("firstName"); }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; OnPropertyChanged("lastName"); }
+        }
+        public string PersonalIdentityNumber
+        {
+            get { return personalIdentityNumber; }
+            set { personalIdentityNumber = value; OnPropertyChanged("personalIdentityNumber"); }
+        }
+        public string Email
+        {
+            get { return email; }
+            set { email = value; OnPropertyChanged("email"); }
+        }
+        public string Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged("password"); }
+        }
+        public EUserType UserType
+        {
+            get { return userType; }
+            set { userType = value; OnPropertyChanged("userType"); }
+        }
+        public EGender Gender
+        {
+            get { return gender; }
+            set { gender = value; OnPropertyChanged("gender"); }
+        }
+        public Address Address
+        {
+            get { return address; }
+            set { address = value; OnPropertyChanged("address"); }
+        }
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged("active"); }
+        }
+
         public new event PropertyChangedEventHandler PropertyChanged;
 
         protected new void OnPropertyChanged(String name)

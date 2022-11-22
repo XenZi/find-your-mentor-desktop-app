@@ -38,7 +38,7 @@ namespace SR38_2021_POP2022.resources.services
                 ObservableCollection<Language> languages = new ObservableCollection<Language>(LanguageManager.GetInstance().AllLanguages.Where(ad => ad.Active).ToList());
                 return languages;
             }
-            catch (AddressNotFoundException exception)
+            catch (LanguageNotFoundException exception)
             {
                 return new ObservableCollection<Language>();
             }

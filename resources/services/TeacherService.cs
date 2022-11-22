@@ -16,10 +16,11 @@ namespace SR38_2021_POP2022.resources.services
     class TeacherService
     {
         TeacherRepository repository;
-
+        AddressService addressService;
         public TeacherService()
         {
             repository = new TeacherRepository();
+            addressService = new AddressService();
         }
 
         public void InitializeService()
@@ -41,18 +42,26 @@ namespace SR38_2021_POP2022.resources.services
 
         public ObservableCollection<Teacher> GetAllTeachers()
         {
-            return TeacherManager.GetInstance().AllTeachers;
+            return new ObservableCollection<Teacher>(TeacherManager.GetInstance().AllTeachers.Where(x => x.Active));
         }
         public Teacher FindByPersonalIDAndPassword(string personalID, string password)
         {
             Teacher a = (Teacher)TeacherManager.GetInstance().AllTeachers.ToList().Find(teacher => teacher.PersonalIdentityNumber == personalID && teacher.Password == password);
             return a;
         }
-        private void CreateTeacher(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string address, bool active, string schoolName, int[] teachingLanguageIDs, int[] sessionIDsFromArray)
+        public void CreateTeacher(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string streetName, int streetNumber, string cityName, string country, bool active, string schoolName, List<Language> languages)
         {
             try
             {
-                repository.Create(firstName, lastName, personalIdentityNumber, email, password, EUserType.Teacher, genderType, AddressManager.GetInstance().GetAddressByStreetName(address), active = true, SchoolManager.GetInstance().GetSchoolByName(schoolName), LanguageManager.GetInstance().GetLanguagesBasedById(teachingLanguageIDs), SessionManager.GetInstance().GetSessionsBasedByID(sessionIDsFromArray).ToList());
+                Address enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+
+                if (enteredAddress == null)
+                {
+                    addressService.CreateAddress(streetName, streetNumber, cityName, country);
+                    enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+                }
+    
+                repository.Create(firstName, lastName, personalIdentityNumber, email, password, EUserType.Teacher, genderType, enteredAddress, active = true, SchoolManager.GetInstance().GetSchoolByName(schoolName), languages, new List<Session>());
             }
             catch (AddressNotFoundException exception)
             {
@@ -72,16 +81,22 @@ namespace SR38_2021_POP2022.resources.services
             }
         }
 
-        private void UpdateTeacher(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string address, bool active, string schoolName, int[] teachingLanguageIDs, int[] sessionIDsFromArray)
+        public void UpdateTeacher(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string streetName, int streetNumber, string cityName, string country, bool active, string schoolName, List<Language> languages)
         {
-            Address foundAddress = AddressManager.GetInstance().GetAddressByStreetName(address);
+
+            Address enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+
+            if (enteredAddress == null)
+            {
+                addressService.CreateAddress(streetName, streetNumber, cityName, country);
+                enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);
+            }
             School workingSchool = SchoolManager.GetInstance().GetSchoolByName(schoolName);
-            List<Language> teachingLanguages = LanguageManager.GetInstance().GetLanguagesBasedById(teachingLanguageIDs);
-            List<Session> sessions = SessionManager.GetInstance().GetSessionsBasedByID(sessionIDsFromArray).ToList();
-            repository.Update(firstName, lastName, personalIdentityNumber, email, password, userType, genderType, foundAddress, active, workingSchool, teachingLanguages, sessions);
+            List<Session> sessions = TeacherManager.GetInstance().GetTeacherByIdentityNumber(personalIdentityNumber).Sessions;
+            repository.Update(firstName, lastName, personalIdentityNumber, email, password, userType, genderType, enteredAddress, active, workingSchool, languages, sessions);
         }
 
-        private void DeleteTeacher(string identityNumber)
+        public void DeleteTeacher(string identityNumber)
         {
             repository.Delete(identityNumber);
         }

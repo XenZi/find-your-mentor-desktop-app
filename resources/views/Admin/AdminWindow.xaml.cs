@@ -1,10 +1,15 @@
-﻿using SR38_2021_POP2022.resources.services;
+﻿using SR38_2021_POP2022.resources.enums;
+using SR38_2021_POP2022.resources.models;
+using SR38_2021_POP2022.resources.services;
 using SR38_2021_POP2022.resources.views.Addresses;
 using SR38_2021_POP2022.resources.views.Languages;
 using SR38_2021_POP2022.resources.views.Schools;
 using SR38_2021_POP2022.resources.views.Sessions;
+using SR38_2021_POP2022.resources.views.Students;
+using SR38_2021_POP2022.resources.views.Teachers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,20 +29,24 @@ namespace SR38_2021_POP2022.resources.views.Admin
     /// </summary>
     public partial class AdminWindow : Window
     {
-        StudentService studentService;
-        TeacherService teacherService;
+        private StudentService studentService;
+        private TeacherService teacherService;
+        private ICollectionView view1;
+        private ICollectionView view2;
         public AdminWindow()
         {
             InitializeComponent();
             studentService = new StudentService();
             teacherService = new TeacherService();
+            view1 = CollectionViewSource.GetDefaultView(studentService.GetAllStudents());
+            view2 = CollectionViewSource.GetDefaultView(teacherService.GetAllTeachers());
             InitializeData();
         }
 
         private void InitializeData()
         {
-            dataStudents.ItemsSource = studentService.GetAllStudents();
-            dataTeachers.ItemsSource = teacherService.GetAllTeachers();
+            dataStudents.ItemsSource = view1;
+            dataTeachers.ItemsSource = view2;
         }
 
         private void btnAddress_Click(object sender, RoutedEventArgs e)
@@ -62,6 +71,67 @@ namespace SR38_2021_POP2022.resources.views.Admin
         {
             SessionsWindow sw = new SessionsWindow();
             sw.Show();
+        }
+
+        private void btnCreateStudent_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUpdateStudentWindow cusw = new CreateUpdateStudentWindow(EWindowStatus.CREATE);
+            cusw.ShowDialog();
+        }
+
+        private void btnUpdateStudent_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataStudents.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected!");
+                return;
+            }
+
+            Student student = (Student)dataStudents.SelectedItem;
+            CreateUpdateStudentWindow cusw = new CreateUpdateStudentWindow(EWindowStatus.UPDATE, student);
+            cusw.Show();
+        }
+
+        private void btnDeleteStudent_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataStudents.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected!");
+                return;
+            }
+            Student student = (Student)dataStudents.SelectedItem;
+            studentService.DeleteStudent(student.PersonalIdentityNumber);
+            view1.Refresh();
+        }
+
+        private void btnCreateTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUpdateTeacher cutw = new CreateUpdateTeacher(EWindowStatus.CREATE);
+            cutw.ShowDialog();
+        }
+
+        private void btnUpdateTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataTeachers.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected!");
+                return;
+            }
+            Teacher teacher = (Teacher)dataTeachers.SelectedItem;
+            CreateUpdateTeacher cutw = new CreateUpdateTeacher(EWindowStatus.UPDATE, teacher);
+            cutw.ShowDialog();
+        }
+
+        private void btnDeleteTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataTeachers.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected!");
+                return;
+            }
+            Teacher teacher = (Teacher)dataTeachers.SelectedItem;
+            teacherService.DeleteTeacher(teacher.PersonalIdentityNumber);
+            view2.Refresh();
         }
     }
 }

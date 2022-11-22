@@ -13,7 +13,8 @@ namespace SR38_2021_POP2022.utilities
         {
             bool isExistingInTeachers = TeacherManager.GetInstance().AllTeachers.Any(teacher => teacher.PersonalIdentityNumber == personalID);
             bool isExistingInStudents = StudentManager.GetInstance().AllStudents.Any(student => student.PersonalIdentityNumber == personalID);
-            return isExistingInStudents || isExistingInTeachers; 
+            bool isExistingInAdmins = AdminManager.GetInstance().AllAdmins.Any(admin => admin.PersonalIdentityNumber == personalID);
+            return isExistingInStudents || isExistingInTeachers || isExistingInAdmins; 
         }
     }
 }

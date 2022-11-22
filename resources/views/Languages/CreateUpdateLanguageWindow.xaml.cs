@@ -63,6 +63,7 @@ namespace SR38_2021_POP2022.resources.views.Languages
             if (status.Equals(EWindowStatus.CREATE))
             {
                 CreateNewLanguage();
+                this.DialogResult = true;
             }
             else
             {

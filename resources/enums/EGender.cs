@@ -8,6 +8,6 @@ namespace SR38_2021_POP2022.resources.enums
 {
     public enum EGender
     {
-        Male = 1, Female = 0
+        Female, Male
     }
 }

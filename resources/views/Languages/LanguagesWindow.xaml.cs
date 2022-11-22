@@ -4,6 +4,7 @@ using SR38_2021_POP2022.resources.services;
 using SR38_2021_POP2022.resources.views.Addresses;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,23 +24,28 @@ namespace SR38_2021_POP2022.resources.views.Languages
     /// </summary>
     public partial class LanguagesWindow : Window
     {
-        LanguageService service = new LanguageService();
+        private LanguageService service = new LanguageService();
+        private ICollectionView view;
         public LanguagesWindow()
         {
             InitializeComponent();
             InitializeData();
+            view = CollectionViewSource.GetDefaultView(service.GetAllLanguages());
         }
 
         private void InitializeData()
         {
-            dataLanguages.ItemsSource = service.GetAllLanguages();
-            DataContext = service.GetAllLanguages();
+            view = CollectionViewSource.GetDefaultView(service.GetAllLanguages());
+            dataLanguages.ItemsSource = view;
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             CreateUpdateLanguageWindow culw = new CreateUpdateLanguageWindow(EWindowStatus.CREATE);
-            culw.Show();
+            if (culw.ShowDialog() == true)
+            {
+                view.Refresh();
+            }
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
