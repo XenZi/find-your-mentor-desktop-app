@@ -56,7 +56,7 @@ namespace SR38_2021_POP2022.resources.models
         }
         public override string ToString()
         {
-            return $"Class {id}, Teacher {teacher.PersonalIdentityNumber}, Student {student.PersonalIdentityNumber}";
+            return $"Class {id}, Teacher {teacher.PersonalIdentityNumber}, Student {student?.PersonalIdentityNumber}";
         }
     }
 }

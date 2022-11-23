@@ -38,14 +38,14 @@ namespace SR38_2021_POP2022.resources.services
             return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Active).ToList());
         }
 
-        public void Create(string teacherID, DateTime reservedDate, string startingTime, int classLength, EClassStatus status, string studentID)
+        public void Create(Teacher teacher, DateTime reservedDate, string startingTime, int classLength, EClassStatus status, Student student = null)
         {
-            repository.Create(TeacherManager.GetInstance().GetTeacherByIdentityNumber(teacherID), reservedDate, startingTime, classLength, status, StudentManager.GetInstance().GetStudentByIdentityNumber(studentID));
+            repository.Create(teacher, reservedDate, startingTime, classLength, status, student);
         }
 
-        public void Update(int id, string teacherID, DateTime reservedDate, string startingTime, int classLength, EClassStatus status, string studentID)
+        public void Update(int id, Teacher teacher, DateTime reservedDate, string startingTime, int classLength, EClassStatus status, Student student = null)
         {
-            repository.Update(id, TeacherManager.GetInstance().GetTeacherByIdentityNumber(teacherID), reservedDate, startingTime, classLength, status, StudentManager.GetInstance().GetStudentByIdentityNumber(studentID));
+            repository.Update(id, teacher, reservedDate, startingTime, classLength, status, student);
         }
 
         public void Delete(int id)

@@ -67,6 +67,8 @@ namespace SR38_2021_POP2022.resources.views.Sessions
             }
             txtClassLength.Text = session.ClassLength.ToString();
             txtStartingTime.Text = session.StartingTime;
+            cmbTeacher.SelectedItem = session.Teacher;
+            datePicker.SelectedDate = session.ReservedDate;
         }
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -82,10 +84,14 @@ namespace SR38_2021_POP2022.resources.views.Sessions
 
         private void CreateNewSession()
         {
+            Teacher teacher = (Teacher) cmbTeacher.SelectedItem;
+            service.Create(teacher, (DateTime) datePicker.SelectedDate, txtStartingTime.Text, int.Parse(txtClassLength.Text), EClassStatus.AVAILABLE);
         }
 
         private void UpdateSession()
         {
+            Teacher teacher = (Teacher)cmbTeacher.SelectedItem;
+            service.Update(session.Id, teacher, (DateTime)datePicker.SelectedDate, txtStartingTime.Text, int.Parse(txtClassLength.Text), EClassStatus.AVAILABLE);
         }
     }
 }

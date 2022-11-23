@@ -19,14 +19,14 @@ namespace SR38_2021_POP2022.utilities.file_related_utilities.file_formatters
             session.StartingTime = splittedLine[3];
             session.ClassLength = int.Parse(splittedLine[4]);
             session.Status = (EClassStatus)int.Parse(splittedLine[5]);
-            session.Student = StudentManager.GetInstance().GetStudentByIdentityNumber(splittedLine[6]);
+            session.Student = splittedLine[6] == "" ? null : StudentManager.GetInstance().GetStudentByIdentityNumber(splittedLine[6]);
             session.Active = bool.Parse(splittedLine[7]);
             return session;
         }
 
         public static string CreateStringFormatForFileStorage(Session session)
         {
-            return String.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}", session.Id, session.Teacher.PersonalIdentityNumber, session.ReservedDate, session.StartingTime, session.ClassLength, (int)session.Status, session.Student.PersonalIdentityNumber, session.Active);
+            return String.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}", session.Id, session.Teacher.PersonalIdentityNumber, session.ReservedDate, session.StartingTime, session.ClassLength, (int)session.Status, session.Student != null ? session.Student.PersonalIdentityNumber : "", session.Active);
         }
         public static string CreateStringRepresentationOfSessionIDs(List<Session> sessions)
         {

@@ -1,4 +1,5 @@
-﻿using SR38_2021_POP2022.resources.services;
+﻿using SR38_2021_POP2022.resources.models;
+using SR38_2021_POP2022.resources.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,7 +45,13 @@ namespace SR38_2021_POP2022.resources.views.Sessions
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            if(dataSessions.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected");
+                return;
+            }
+            CreateUpdateSession cus = new CreateUpdateSession(enums.EWindowStatus.UPDATE, (Session) dataSessions.SelectedItem);
+            cus.Show();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
