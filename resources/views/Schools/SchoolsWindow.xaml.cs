@@ -30,12 +30,12 @@ namespace SR38_2021_POP2022.resources.views.Schools
         {
             InitializeComponent();
             service = new SchoolService();
-            view = CollectionViewSource.GetDefaultView(service.GetAllSchools());
             InitializeData();
         }
 
         private void InitializeData()
         {
+            view = CollectionViewSource.GetDefaultView(service.GetAllSchools());
             dataSchool.ItemsSource = view;
             dataSchool.IsSynchronizedWithCurrentItem = true;
 
@@ -48,6 +48,7 @@ namespace SR38_2021_POP2022.resources.views.Schools
             if(cusw.ShowDialog() == true)
             {
                 view.Refresh();
+                dataSchool.ItemsSource = service.GetAllSchools();
             }
         }
 
@@ -72,7 +73,7 @@ namespace SR38_2021_POP2022.resources.views.Schools
             }
             School school = (School)dataSchool.SelectedItem;
             service.Delete(school.Id);
-            view.Refresh();
+            dataSchool.ItemsSource = service.GetAllSchools();
         }
     }
 }

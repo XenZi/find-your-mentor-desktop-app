@@ -45,6 +45,7 @@ namespace SR38_2021_POP2022.resources.views.Languages
             if (culw.ShowDialog() == true)
             {
                 view.Refresh();
+                dataLanguages.ItemsSource = service.GetAllLanguages();
             }
         }
 

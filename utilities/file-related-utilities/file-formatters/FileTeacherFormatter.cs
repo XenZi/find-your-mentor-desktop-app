@@ -27,7 +27,7 @@ namespace SR38_2021_POP2022.resources.dao
             teacher.Address = AddressManager.GetInstance().GetAddressById(int.Parse(splittedLine[7]));
             teacher.WorkingSchool = SchoolManager.GetInstance().GetSchoolById(int.Parse(splittedLine[8]));
             teacher.TeachingLanguages = LanguageManager.GetInstance().GetLanguagesBasedById((FileLanguageFormatter.SplitLanguagesFromFile(splittedLine[9]))).ToList();
-            teacher.Sessions = splittedLine[10] == "" ? new List<Session>() : SessionManager.GetInstance().GetSessionsBasedByID(FileSessionFormatter.SplitSessionsFromFile(splittedLine[10])).ToList();
+            teacher.Sessions = new List<Session>();
             teacher.Active = bool.Parse(splittedLine[11]);
             return teacher;
         }

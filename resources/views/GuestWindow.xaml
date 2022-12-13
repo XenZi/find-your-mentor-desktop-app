@@ -11,10 +11,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="28,41,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Pick up place" VerticalAlignment="Top"/>
-        <ComboBox Name="cmbPlace" HorizontalAlignment="Left" Margin="28,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="188,41,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Pick one language" VerticalAlignment="Top"/>
-        <ComboBox Name="cmbLanguage" HorizontalAlignment="Left" Margin="188,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Pick up place" VerticalAlignment="Top"/>
+        <ComboBox Name="cmbPlace" HorizontalAlignment="Left" Margin="28,33,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectionChanged="cmbPlace_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="188,13,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Pick languages" VerticalAlignment="Top"/>
         <DataGrid HorizontalAlignment="Center" Height="115" Margin="0,140,0,0" VerticalAlignment="Top" Width="696" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Name="dataSchools" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
         </DataGrid>
         <Button Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="24" Margin="164,332,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="111" Click="btnExit_Click" />
@@ -22,5 +21,6 @@
         <Button Name="btnGetBack" Content="Back" HorizontalAlignment="Left" Height="24" Margin="471,332,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="111" Click="btnGetBack_Click"/>
         <TextBlock HorizontalAlignment="Left" FontWeight="Bold" FontSize="18" Margin="308,10,0,0" TextWrapping="Wrap" Text="Hello guest, welcome!" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="365,109,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Schools" FontSize="16" FontWeight="Black" VerticalAlignment="Top"/>
+        <ListBox Name="listLanguages" HorizontalAlignment="Left" Height="72" Margin="188,33,0,0" Grid.Row="1" VerticalAlignment="Top" Width="166" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listLanguages_SelectionChanged" SelectionMode="Extended"/>
     </Grid>
 </Window>

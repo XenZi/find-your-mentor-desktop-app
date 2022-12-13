@@ -26,10 +26,10 @@ namespace SR38_2021_POP2022
             teacherService.InitializeService();
             StudentService studentService = new StudentService();
             studentService.InitializeService();
-            SessionService sessionService = new SessionService();
-            sessionService.InitializeService();
             AdminService adminService = new AdminService();
             adminService.InitializeService();
+            SessionService sessionService = new SessionService();
+            sessionService.InitializeService();
         }
     }
 }

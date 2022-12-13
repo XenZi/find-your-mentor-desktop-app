@@ -2,6 +2,7 @@
 using SR38_2021_POP2022.resources.services;
 using SR38_2021_POP2022.resources.views;
 using SR38_2021_POP2022.resources.views.Admin;
+using SR38_2021_POP2022.resources.views.Teachers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,21 @@ namespace SR38_2021_POP2022
                 AdminWindow adminView = new AdminWindow();
                 adminView.Show();
                 this.Close();
+            }
+            else if (teacher != null)
+            {
+                MessageBox.Show("You are logged in as teacher. ");
+                TeacherWindow teacherWindow = new TeacherWindow(teacher);
+                teacherWindow.Show();
+                this.Close();
+            }
+            else if (student != null)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Login credentials are wrong!");
             }
         }
     }

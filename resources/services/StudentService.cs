@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace SR38_2021_POP2022.resources.services
 {
@@ -15,9 +16,11 @@ namespace SR38_2021_POP2022.resources.services
     {
         private StudentRepository repository;
         private AddressService addressService;
+        private SessionService sessionService;
         public StudentService()
         {
             repository = new StudentRepository();
+            sessionService = new SessionService();
             addressService = new AddressService();
         }
 
@@ -44,10 +47,35 @@ namespace SR38_2021_POP2022.resources.services
             return a;
         }
 
+        public Student FindBySessionID(int id)
+        {
+            Student foundStudent = null;
+            foreach(Student student in StudentManager.GetInstance().AllStudents)
+            {
+               foreach(Session session in student.ReservedSessions)
+                {
+                    if (session.Id == id) foundStudent = student;
+                }
+            }
+            return foundStudent;
+        }
+
+        public void InitializeStudentSession()
+        {
+            sessionService.GetAllSessions().ToList().ForEach(session => {
+                Student student = session.Student;
+                if (student != null)
+                {
+                    student.ReservedSessions.Add(session);
+                }
+            });
+        }
+
         public ObservableCollection<Student> GetAllStudents()
         {
             return new ObservableCollection<Student>(StudentManager.GetInstance().AllStudents.Where(x => x.Active));
         }
+
         public void CreateStudent(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender genderType, string streetName, int streetNumber, string cityName, string country)
         {
             Address enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, cityName);

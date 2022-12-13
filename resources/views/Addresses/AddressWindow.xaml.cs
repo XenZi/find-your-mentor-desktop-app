@@ -44,6 +44,8 @@ namespace SR38_2021_POP2022.resources.views.Addresses
             {
                 view.Refresh();
             }
+            dataAddresses.ItemsSource = service.GetAllAddresses();
+
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -56,6 +58,7 @@ namespace SR38_2021_POP2022.resources.views.Addresses
             Address address = (Address)dataAddresses.SelectedItem;
             CreateUpdateAddressWindow cuaw = new CreateUpdateAddressWindow(EWindowStatus.UPDATE, address);
             cuaw.ShowDialog();
+            dataAddresses.ItemsSource = service.GetAllAddresses();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

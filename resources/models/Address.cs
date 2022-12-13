@@ -49,7 +49,7 @@ namespace SR38_2021_POP2022.resources.models
         }
         public override string ToString()
         {
-            return id.ToString() + "|" + street + "|" + number.ToString() + "|" + city.ToString() + "|" + country.ToString();
+            return ($"{street} {number} {city} {country}");
         }
     }
 }

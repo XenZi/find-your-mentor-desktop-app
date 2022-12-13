@@ -40,6 +40,7 @@ namespace SR38_2021_POP2022.resources.views.Sessions
             if (cus.ShowDialog() == true)
             {
                 view.Refresh();
+                dataSessions.ItemsSource = service.GetAllSessions();
             }
         }
 
@@ -56,7 +57,14 @@ namespace SR38_2021_POP2022.resources.views.Sessions
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dataSessions.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Something must be selected");
+                return;
+            }
+            Session session = (Session)dataSessions.SelectedItem;
+            service.Delete(session.Id);
+            dataSessions.ItemsSource = service.GetAllSessions();
         }
     }
 }

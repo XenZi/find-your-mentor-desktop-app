@@ -24,7 +24,7 @@ namespace SR38_2021_POP2022.utilities.file_related_utilities
             student.UserType = (EUserType)int.Parse(splittedLine[5]);
             student.Gender = (EGender)int.Parse(splittedLine[6]);
             student.Address = AddressManager.GetInstance().GetAddressById(int.Parse(splittedLine[7]));
-            student.ReservedSessions = splittedLine[8] == "" ? new List<Session>() : SessionManager.GetInstance().GetSessionsBasedByID(FileSessionFormatter.SplitSessionsFromFile(splittedLine[8])).ToList();
+            student.ReservedSessions = new List<Session>();
             student.Active = bool.Parse(splittedLine[9]);
             return student;
         }
@@ -32,6 +32,11 @@ namespace SR38_2021_POP2022.utilities.file_related_utilities
         public static string CreateStringFormatForFile(Student student)
         {
             return String.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}", student.PersonalIdentityNumber, student.FirstName, student.LastName, student.Email, student.Password, (int)student.UserType, (int)student.Gender, student.Address.Id, FileSessionFormatter.CreateStringRepresentationOfSessionIDs(student.ReservedSessions), student.Active);
+        }
+
+        public static void InitializeSessionsToStudent(string[] splittedLine, string studentID)
+        {
+
         }
     }
 }

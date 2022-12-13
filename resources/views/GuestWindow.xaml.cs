@@ -3,6 +3,7 @@ using SR38_2021_POP2022.resources.models;
 using SR38_2021_POP2022.resources.services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -23,9 +24,15 @@ namespace SR38_2021_POP2022.resources.views
     /// </summary>
     public partial class GuestWindow : Window
     {
+        private SchoolService schoolService;
+        private LanguageService languageService;
+        private AddressService addressService;
         public GuestWindow()
         {
             InitializeComponent();
+            this.schoolService = new SchoolService();
+            this.languageService = new LanguageService();
+            this.addressService = new AddressService();
             InitializeData();
         }
 
@@ -37,7 +44,9 @@ namespace SR38_2021_POP2022.resources.views
         private void InitializeData()
         {
             dataSchools.ItemsSource = null;
-            dataSchools.ItemsSource = SchoolManager.GetInstance().AllSchools;
+            dataSchools.ItemsSource = schoolService.GetAllSchools();
+            cmbPlace.ItemsSource = addressService.GetAllCities();
+            listLanguages.ItemsSource = languageService.GetAllLanguages();
         }
 
         private void btnSearchTeacher_Click(object sender, RoutedEventArgs e)
@@ -60,6 +69,25 @@ namespace SR38_2021_POP2022.resources.views
             LoginWindow lw = new LoginWindow();
             lw.Show();
             this.Hide();
+        }
+
+        private void cmbPlace_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string searchedName = cmbPlace.SelectedItem.ToString();
+            dataSchools.ItemsSource = schoolService.GetSchoolByCityName(searchedName);
+        }
+
+        private void listLanguages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Language> selectedItems = listLanguages.SelectedItems.Cast<Language>().ToList<Language>();
+            if (cmbPlace.SelectedIndex != -1)
+            {
+                dataSchools.ItemsSource = schoolService.GetSchoolsByLanguagesAndCity(selectedItems, cmbPlace.SelectedItem.ToString());
+            }
+            else
+            {
+                dataSchools.ItemsSource = schoolService.GetSchoolsByLanguages(selectedItems); 
+            }
         }
     }
 }

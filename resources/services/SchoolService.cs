@@ -33,10 +33,48 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
 
+        public ObservableCollection<School> GetSchoolsByLanguagesAndCity(List<Language> languageList, string cityName)
+        {
+            ObservableCollection<School> returnableCollection = new ObservableCollection<School>();
+            languageList.ForEach(language =>
+            {
+                GetAllSchools().ToList().ForEach(school =>
+                {
+                    if (school.AllLanguages.Contains(language) && school.Address.City == cityName)
+                    {
+                        returnableCollection.Add(school);
+                    }
+                });
+            });
+            return returnableCollection;
+        }
+
+        public ObservableCollection<School> GetSchoolsByLanguages(List<Language> languageList)
+        {
+            ObservableCollection<School> returnableCollection = new ObservableCollection<School>();
+            languageList.ForEach(language =>
+            {
+                GetAllSchools().ToList().ForEach(school =>
+                {
+                    if (school.AllLanguages.Contains(language))
+                    {
+                        returnableCollection.Add(school);
+                    }
+                });
+            });
+            return returnableCollection;
+        }
+
+        public ObservableCollection<School> GetSchoolByCityName(string name)
+        {
+            return new ObservableCollection<School>(GetAllSchools().ToList().Where(school => school.Address.City == name));
+        }
+
         public ObservableCollection<School> GetAllSchools()
         {
             return new ObservableCollection<School>(SchoolManager.GetInstance().AllSchools.ToList().Where(school => school.Active));
         }
+
         public void Create(string name, string streetName, int streetNumber, string city, string country, List<Language> languages)
         {
             Address enteredAddress = addressService.GetAddressByStreetNameNumberAndCity(streetName, streetNumber, city);

@@ -30,6 +30,12 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
 
+
+        public ObservableCollection<String> GetAllCities()
+        {
+            return new ObservableCollection<string>(GetAllAddresses().ToList().Select(address => address.City).Distinct());
+        }
+
         public ObservableCollection<Address> GetAllAddresses()
         {
             try

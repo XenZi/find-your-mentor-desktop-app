@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using SR38_2021_POP2022.resources.models;
+using System.Windows;
 
 namespace SR38_2021_POP2022.resources.services
 {
@@ -33,6 +34,14 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
 
+        public ObservableCollection<Session> GetSessionsBasedByTeacherIDAndDate(string id, DateTime date)
+        {
+            return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Teacher.PersonalIdentityNumber == id && session.ReservedDate.Date == date.Date));
+        }
+        public ObservableCollection<Session> GetSessionsBasedByTeacherID(string id)
+        {
+            return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Teacher.PersonalIdentityNumber == id));
+        }
         public ObservableCollection<Session> GetAllSessions()
         {
             return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Active).ToList());

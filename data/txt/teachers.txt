@@ -1,2 +1,3 @@
-1234567891011|Mateja|Rilak|rilakmateja@gmail.com|password|2|1|1|1|0,1||True
+123|Mateja|Rilak|rilakmateja@gmail.com|123|2|1|1|1|0,1||True
 151361334|Neki|Novi|mmm@gmail.com|mm123|2|0|2|1|1,0||False
+15135163636|profaaaaa|aaaprofa|profa@gmail.com|profa123|2|0|9|1|1,2||False

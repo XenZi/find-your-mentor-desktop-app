@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="SearchTeachersWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="dataTeachers" HorizontalAlignment="Center" Height="250" Margin="0,21,0,0" VerticalAlignment="Top" Width="749" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <DataGrid HorizontalAlignment="Left" Height="180" Name="dataTeachers" Margin="47,54,0,0" VerticalAlignment="Top" Width="697" ItemsSource="{Binding Teacher}" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding PersonalIdentityNumber}" />
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" />
+                <DataGridTextColumn Header="Working School" Binding="{Binding WorkingSchool.Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

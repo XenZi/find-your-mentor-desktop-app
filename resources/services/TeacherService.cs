@@ -17,10 +17,12 @@ namespace SR38_2021_POP2022.resources.services
     {
         TeacherRepository repository;
         AddressService addressService;
+        SessionService sessionService;
         public TeacherService()
         {
             repository = new TeacherRepository();
             addressService = new AddressService();
+            sessionService = new SessionService();
         }
 
         public void InitializeService()
@@ -34,9 +36,20 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
 
-        public List<Teacher> GetTeachersBasedBySchoolID(int schoolID)
+        public void InitializeTeacherSessions()
         {
-            List<Teacher> list = TeacherManager.GetInstance().AllTeachers.ToList().FindAll(teacher => teacher.WorkingSchool.Id == schoolID);
+            sessionService.GetAllSessions().ToList().ForEach(session => {
+                Teacher teacher = session.Teacher;
+                if (teacher != null)
+                {
+                    teacher.Sessions.Add(session);
+                }
+            });
+        }
+
+        public ObservableCollection<Teacher> GetTeachersBasedBySchoolID(int schoolID)
+        {
+            ObservableCollection<Teacher> list = new ObservableCollection<Teacher>(TeacherManager.GetInstance().AllTeachers.ToList().FindAll(teacher => teacher.WorkingSchool.Id == schoolID));
             return list;
         }
 

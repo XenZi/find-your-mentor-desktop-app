@@ -9,6 +9,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace SR38_2021_POP2022.resources.dao
 {
@@ -16,9 +18,31 @@ namespace SR38_2021_POP2022.resources.dao
     {
         public void Read()
         {
-            string[] readedFromFile = FileHandler.ReadFile(AddressManager.FILE_PATH);
+            /*string[] readedFromFile = FileHandler.ReadFile(AddressManager.FILE_PATH);
             foreach(string line in readedFromFile) {
                 if (line != "") AddressManager.GetInstance().AllAddresses.Add(FileAddressFormatter.createAddressFromFile(line.Split('|')));
+            }*/
+
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"select * from Address where is_active = 1";
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Address address = new Address();
+                    address.Id = reader.GetInt32(0);
+                    address.Street = reader.GetString(1);
+                    address.Number = reader.GetInt32(2);
+                    address.City = reader.GetString(3);
+                    address.Country = reader.GetString(4);
+                    address.Active = reader.GetBoolean(5);
+                    AddressManager.GetInstance().AllAddresses.Add(address);
+                }
+
+                conn.Close();
             }
 
         }
@@ -26,27 +50,65 @@ namespace SR38_2021_POP2022.resources.dao
         public void Create(string street, int number, string city, string country, bool active = true)
         {
             int id = IDGenerator.GenerateAddressID();
-            MessageBox.Show(id.ToString());
             Address address = new Address(id, street, number, city, country, active);
             AddressManager.GetInstance().AllAddresses.Add(address);
-            FileHandler.WriteFile(AddressManager.FILE_PATH, FileAddressFormatter.createStringFormatForFileStorage(address));
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("insert into Address values(@id ,@street, @address_number, @city, @country, @is_active)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@street", street);
+                    cmd.Parameters.AddWithValue("@address_number", number);
+                    cmd.Parameters.AddWithValue("@city", city);
+                    cmd.Parameters.AddWithValue("@country", country);
+                    cmd.Parameters.AddWithValue("@is_active", 1);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
         public void Update(int id, string street, int number, string city, string country)
         {
-            Address updatedAddress = AddressManager.GetInstance().GetAddressById(id);
-            updatedAddress.Street = street;
-            updatedAddress.Number = number;
-            updatedAddress.City = city;
-            updatedAddress.Country = country;
-            FileHandler.UpdateFile(AddressManager.FILE_PATH, FileAddressFormatter.createStringFormatForFileStorage(updatedAddress));
+            Address address = AddressManager.GetInstance().GetAddressById(id);
+            address.Street = street;
+            address.Number = number;
+            address.City = city;
+            address.Country = country;
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("update Address set street=@street,address_number=@address_number,city=@city,country=@country where id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@street", street);
+                    cmd.Parameters.AddWithValue("@address_number", number);
+                    cmd.Parameters.AddWithValue("@city", city);
+                    cmd.Parameters.AddWithValue("@country", country);
+                    int rows = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
         public void Delete(int id)
         {
             Address updatedAddress = AddressManager.GetInstance().GetAddressById(id);
             updatedAddress.Active = false;
-            FileHandler.UpdateFile(AddressManager.FILE_PATH, FileAddressFormatter.createStringFormatForFileStorage(updatedAddress));
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("update Address set is_active = 0 where id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    int rows = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
     }
 }

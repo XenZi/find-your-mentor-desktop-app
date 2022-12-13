@@ -1,4 +1,5 @@
-123123|Mateja|Rilak|rilaktest@gmail.com|password|1|1|1||True
+123123|Mateja|Rilak|rilaktest@gmail.com|password|1|1|1|1,|True
 123123123132|Saska|Saskovic|saskasaskovic@saska.com|saska123|1|0|3||True
 1231231|Sanja|Sanjkovic|sanjasanjkovic@gmail.com|sanja123|1|0|2||True
-133151351|Jelica|Jelickovic|jelicajelickovic@gmail.com|jelka123|1|0|2||True
+133151351|Jelicaaaa|aaaaaaJelickovic|jelicajelickovic@gmail.com|jelka123|1|0|2||False
+14516316|student|student|student@gmail.com|student123|1|0|2||True

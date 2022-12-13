@@ -5,4 +5,4 @@
 4|Novii|False
 5|Japanski|True
 6|Turski|False
-7|Madjarski|True
+7|Madjarski|False

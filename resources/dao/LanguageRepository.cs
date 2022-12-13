@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace SR38_2021_POP2022.resources.dao
 {
@@ -14,10 +16,29 @@ namespace SR38_2021_POP2022.resources.dao
     {
         public void Read()
         {
-            string[] readedFromFile = FileHandler.ReadFile(LanguageManager.FILE_PATH);
-            foreach(string line in readedFromFile)
+            //string[] readedFromFile = FileHandler.ReadFile(LanguageManager.FILE_PATH);
+            //foreach(string line in readedFromFile)
+            //{
+            //    if (line != "") LanguageManager.GetInstance().AllLanguages.Add(FileLanguageFormatter.CreateLanguageFromFile(line.Split('|')));
+            //}
+
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
             {
-                if (line != "") LanguageManager.GetInstance().AllLanguages.Add(FileLanguageFormatter.CreateLanguageFromFile(line.Split('|')));
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"select * from Language where is_active = 1";
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Language language = new Language();
+                    language.Id = reader.GetInt32(0);
+                    language.LanguageName = reader.GetString(1);
+                    language.Active = reader.GetBoolean(2);
+                    LanguageManager.GetInstance().AllLanguages.Add(language);
+                }
+
+                conn.Close();
             }
         }
 
@@ -26,21 +47,54 @@ namespace SR38_2021_POP2022.resources.dao
             int id = IDGenerator.GenerateLanguageID();
             Language language = new Language(id, languageName, active);
             LanguageManager.GetInstance().AllLanguages.Add(language);
-            FileHandler.WriteFile(LanguageManager.FILE_PATH, FileLanguageFormatter.CreateStringFormatForFileStorage(language));
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("insert into Language values(@id ,@lang_name, @is_active)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@lang_name", languageName);
+                    cmd.Parameters.AddWithValue("@is_active", 1);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
         public void Update(int id, string languageName)
         {
             Language language = LanguageManager.GetInstance().GetLanguageById(id);
             language.LanguageName = languageName;
-            FileHandler.UpdateFile(LanguageManager.FILE_PATH, FileLanguageFormatter.CreateStringFormatForFileStorage(language));
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("update Language set lang_name=@lang_name where id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@lang_name", languageName);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
         public void Delete(int id)
         {
             Language language = LanguageManager.GetInstance().GetLanguageById(id);
             language.Active = false;
-            FileHandler.UpdateFile(LanguageManager.FILE_PATH, FileLanguageFormatter.CreateStringFormatForFileStorage(language));
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("update Language set is_active = 0 where id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    int rows = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
     }
 }

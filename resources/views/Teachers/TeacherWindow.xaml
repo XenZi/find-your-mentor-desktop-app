@@ -1,0 +1,19 @@
+﻿<Window x:Class="SR38_2021_POP2022.resources.views.Teachers.TeacherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SR38_2021_POP2022.resources.views.Teachers"
+        mc:Ignorable="d"
+        Title="TeacherWindow" Height="450" Width="800">
+    <Grid Margin="25 25 25 25">
+        <TextBlock HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" TextWrapping="Wrap" Text="Teacher" VerticalAlignment="Top"/>
+        <DatePicker Name="sessionDate" Margin="10,69,638,0" VerticalAlignment="Top" FirstDayOfWeek="Monday" SelectedDateChanged="sessionDate_ValueChanged"/>
+        <Label Content="Search sessions by date" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
+        <DataGrid HorizontalAlignment="Center" Height="163" Margin="0,108,0,0" VerticalAlignment="Top" Width="730" d:ItemsSource="{d:SampleData ItemCount=5}" Name="dataSessions" CanUserAddRows="False" CanUserDeleteRows="False"/>
+        <Button Content="Create Session" Name="btnCreateSession" HorizontalAlignment="Left" Height="28" Margin="125,316,0,0" VerticalAlignment="Top" Width="105" Click="btnCreateSession_Click"/>
+        <Button Content="Delete Session" Name="btnDeleteSession" HorizontalAlignment="Left" Height="28" Margin="250,316,0,0" VerticalAlignment="Top" Width="90" Click="btnDeleteSession_Click"/>
+        <Button Content="View Personal Information" Name="btnViewPersonalInfo" HorizontalAlignment="Left" Height="28" Margin="361,316,0,0" VerticalAlignment="Top" Width="163"/>
+        <Button Content="View Student" Name="btnViewStudent" HorizontalAlignment="Left" Height="28" Margin="544,316,0,0" VerticalAlignment="Top" Width="89" Click="btnViewStudent_Click"/>
+    </Grid>
+</Window>

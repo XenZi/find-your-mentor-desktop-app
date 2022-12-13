@@ -75,11 +75,13 @@ namespace SR38_2021_POP2022.resources.views.Sessions
             if (status.Equals(EWindowStatus.CREATE))
             {
                 CreateNewSession();
+                this.DialogResult = true;
             }
             else
             {
                 UpdateSession();
             }
+            this.Close();
         }
 
         private void CreateNewSession()
