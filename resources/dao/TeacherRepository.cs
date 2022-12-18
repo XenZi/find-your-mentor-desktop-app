@@ -20,7 +20,7 @@ namespace SR38_2021_POP2022.resources.dao
             {
                 conn.Open();
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"select * from Teacher where is_active = 1";
+                command.CommandText = @"select * from Teacher";
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -147,6 +147,29 @@ namespace SR38_2021_POP2022.resources.dao
                 conn.Close();
             }
             return schoolLanguageList;
+        }
+
+        private List<Session> initializeSession(string teacherID)
+        {
+            List<Session> sessionList = new List<Session>();
+
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = $"select id from Session where teacher_id = @teacher_id";
+                command.Parameters.AddWithValue("@teacher_id", teacherID);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.Write(reader.GetInt32(0).ToString());
+                    Session session = SessionManager.GetInstance().GetSessionById(reader.GetInt32(0));
+                    sessionList.Add(session);
+                }
+
+                conn.Close();
+            }
+            return sessionList;
         }
     }
 }

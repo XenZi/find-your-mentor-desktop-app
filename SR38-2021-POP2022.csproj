@@ -107,6 +107,7 @@
     <Compile Include="resources\services\AdminService.cs" />
     <Compile Include="resources\services\LanguageService.cs" />
     <Compile Include="resources\services\SchoolService.cs" />
+    <Compile Include="resources\services\SearchUserService.cs" />
     <Compile Include="resources\services\SessionService.cs" />
     <Compile Include="resources\services\StudentService.cs" />
     <Compile Include="resources\services\TeacherService.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="resources\views\SearchTeachersWindow.xaml.cs">
       <DependentUpon>SearchTeachersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="resources\views\Search\SearchRegisteredUser.xaml.cs">
+      <DependentUpon>SearchRegisteredUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="resources\views\Sessions\CreateUpdateSession.xaml.cs">
       <DependentUpon>CreateUpdateSession.xaml</DependentUpon>
     </Compile>
@@ -149,6 +153,9 @@
     <Compile Include="resources\views\Students\CreateUpdateStudentWindow.xaml.cs">
       <DependentUpon>CreateUpdateStudentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="resources\views\Students\StudentWindow.xaml.cs">
+      <DependentUpon>StudentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="resources\views\Students\ViewStudentPersonalnfoWindow.xaml.cs">
       <DependentUpon>ViewStudentPersonalnfoWindow.xaml</DependentUpon>
     </Compile>
@@ -157,6 +164,9 @@
     </Compile>
     <Compile Include="resources\views\Teachers\TeacherWindow.xaml.cs">
       <DependentUpon>TeacherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="resources\views\ViewUpdatePersonalData.xaml.cs">
+      <DependentUpon>ViewUpdatePersonalData.xaml</DependentUpon>
     </Compile>
     <Compile Include="utilities\CheckForPersonalIdentityDuplicates.cs" />
     <Compile Include="utilities\DBHandler.cs" />
@@ -226,6 +236,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\views\Search\SearchRegisteredUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\views\Sessions\CreateUpdateSession.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,6 +252,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\views\Students\StudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\views\Students\ViewStudentPersonalnfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\views\Teachers\TeacherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\views\ViewUpdatePersonalData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

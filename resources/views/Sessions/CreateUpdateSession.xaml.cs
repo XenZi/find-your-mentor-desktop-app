@@ -27,11 +27,13 @@ namespace SR38_2021_POP2022.resources.views.Sessions
         private Session session;
         private SessionService service;
         private TeacherService teacherService;
-        public CreateUpdateSession(EWindowStatus status, Session session = null)
+        private Teacher teacherCreating;
+        public CreateUpdateSession(EWindowStatus status, Session session = null, Teacher teacherCreating = null)
         {
             InitializeComponent();
             this.status = status;
             this.session = session;
+            this.teacherCreating = teacherCreating;
             InitializeData();
             datePicker.DisplayDateStart = DateTime.Today;
             MakeWindowChangesBasedByStatus();
@@ -42,8 +44,7 @@ namespace SR38_2021_POP2022.resources.views.Sessions
         {
             service = new SessionService();
             teacherService = new TeacherService();
-            cmbTeacher.ItemsSource = teacherService.GetAllTeachers();
-
+            cmbTeacher.ItemsSource = teacherService.GetAllTeachers().ToList();
         }
         private void MakeWindowChangesBasedByStatus()
         {
@@ -56,6 +57,12 @@ namespace SR38_2021_POP2022.resources.views.Sessions
             {
                 this.Title = "Update current session";
                 btnSubmit.Content = "Update";
+            }
+
+            if (teacherCreating != null)
+            {
+                cmbTeacher.SelectedItem = teacherCreating;
+                cmbTeacher.IsEnabled = false;
             }
         }
 
@@ -75,7 +82,6 @@ namespace SR38_2021_POP2022.resources.views.Sessions
             if (status.Equals(EWindowStatus.CREATE))
             {
                 CreateNewSession();
-                this.DialogResult = true;
             }
             else
             {

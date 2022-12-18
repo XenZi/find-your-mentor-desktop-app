@@ -26,7 +26,7 @@ namespace SR38_2021_POP2022.resources.dao
             {
                 conn.Open();
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"select * from Student where is_active = 1";
+                command.CommandText = @"select * from Student";
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())

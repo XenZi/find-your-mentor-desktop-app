@@ -13,7 +13,7 @@
         <DataGrid HorizontalAlignment="Center" Height="163" Margin="0,108,0,0" VerticalAlignment="Top" Width="730" d:ItemsSource="{d:SampleData ItemCount=5}" Name="dataSessions" CanUserAddRows="False" CanUserDeleteRows="False"/>
         <Button Content="Create Session" Name="btnCreateSession" HorizontalAlignment="Left" Height="28" Margin="125,316,0,0" VerticalAlignment="Top" Width="105" Click="btnCreateSession_Click"/>
         <Button Content="Delete Session" Name="btnDeleteSession" HorizontalAlignment="Left" Height="28" Margin="250,316,0,0" VerticalAlignment="Top" Width="90" Click="btnDeleteSession_Click"/>
-        <Button Content="View Personal Information" Name="btnViewPersonalInfo" HorizontalAlignment="Left" Height="28" Margin="361,316,0,0" VerticalAlignment="Top" Width="163"/>
+        <Button Content="View Personal Information" Name="btnViewPersonalInfo" HorizontalAlignment="Left" Height="28" Margin="361,316,0,0" VerticalAlignment="Top" Width="163" Click="btnViewPersonalInfo_Click"/>
         <Button Content="View Student" Name="btnViewStudent" HorizontalAlignment="Left" Height="28" Margin="544,316,0,0" VerticalAlignment="Top" Width="89" Click="btnViewStudent_Click"/>
     </Grid>
 </Window>

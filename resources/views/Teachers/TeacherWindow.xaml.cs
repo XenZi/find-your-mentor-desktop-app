@@ -5,6 +5,7 @@ using SR38_2021_POP2022.resources.views.Sessions;
 using SR38_2021_POP2022.resources.views.Students;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace SR38_2021_POP2022.resources.views.Teachers
             this.teacher = loggedTeacher;
             sessionService = new SessionService();
             studentService = new StudentService();
-            view = CollectionViewSource.GetDefaultView(sessionService.GetAllSessions());
+            view = CollectionViewSource.GetDefaultView(new ObservableCollection<Session>(teacher.Sessions));
             InitializeData();
         }
 
@@ -47,6 +48,11 @@ namespace SR38_2021_POP2022.resources.views.Teachers
 
         private void sessionDate_ValueChanged(object sender, EventArgs e)
         {
+            if (sessionDate.SelectedDate.Equals(null))
+            {
+                dataSessions.ItemsSource = new ObservableCollection<Session>(teacher.Sessions);
+                return;
+            }
             dataSessions.ItemsSource = sessionService.GetSessionsBasedByTeacherIDAndDate(teacher.PersonalIdentityNumber, (DateTime)sessionDate.SelectedDate);
         }
 
@@ -72,15 +78,22 @@ namespace SR38_2021_POP2022.resources.views.Teachers
                 return;
             }
             sessionService.Delete(session.Id);
-            dataSessions.ItemsSource = sessionService.GetAllSessions();
+            dataSessions.ItemsSource = new ObservableCollection<Session>(teacher.Sessions);
             view.Refresh();
         }
 
         private void btnCreateSession_Click(object sender, RoutedEventArgs e)
         {
-            CreateUpdateSession cus = new CreateUpdateSession(EWindowStatus.CREATE);
+            CreateUpdateSession cus = new CreateUpdateSession(EWindowStatus.CREATE, null, teacher) ;
             cus.Show();
-            dataSessions.ItemsSource = sessionService.GetAllSessions();
+            dataSessions.ItemsSource = new ObservableCollection<Session>(teacher.Sessions);
         }
+
+        private void btnViewPersonalInfo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewUpdatePersonalData vupd = new ViewUpdatePersonalData(teacher);
+            vupd.Show();
+            dataSessions.ItemsSource = new ObservableCollection<Session>(teacher.Sessions);
+         }
     }
 }

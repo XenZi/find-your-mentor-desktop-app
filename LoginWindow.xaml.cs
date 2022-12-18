@@ -2,6 +2,7 @@
 using SR38_2021_POP2022.resources.services;
 using SR38_2021_POP2022.resources.views;
 using SR38_2021_POP2022.resources.views.Admin;
+using SR38_2021_POP2022.resources.views.Students;
 using SR38_2021_POP2022.resources.views.Teachers;
 using System;
 using System.Collections.Generic;
@@ -75,7 +76,10 @@ namespace SR38_2021_POP2022
             }
             else if (student != null)
             {
-
+                MessageBox.Show("You are logged in as teacher. ");
+                StudentWindow studentWindow = new StudentWindow(student);
+                studentWindow.Show();
+                this.Close();
             }
             else
             {

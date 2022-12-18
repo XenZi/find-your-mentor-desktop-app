@@ -19,7 +19,7 @@ namespace SR38_2021_POP2022.resources.dao
             {
                 conn.Open();
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"select * from School where is_active = 1";
+                command.CommandText = @"select * from School";
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -128,7 +128,6 @@ namespace SR38_2021_POP2022.resources.dao
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.Write(reader.GetInt32(0).ToString());
                     Language language = LanguageManager.GetInstance().GetLanguageById(reader.GetInt32(0));
                     Console.WriteLine(language.ToString());
                     schoolLanguageList.Add(language);

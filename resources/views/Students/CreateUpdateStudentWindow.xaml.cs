@@ -102,6 +102,6 @@ namespace SR38_2021_POP2022.resources.views.Students
         private void UpdateStudent()
         {
             service.UpdateStudent(txtFirstName.Text, txtLastName.Text, txtPersonalIdentityNumber.Text, txtEmail.Text, txtPassword.Password, EUserType.Student, (EGender)Enum.Parse(typeof(EGender), comboGender.Text), txtStreetAddress.Text, int.Parse(txtStreetNumber.Text), txtCity.Text, txtCountry.Text);
-    }
+        }
     }
 }

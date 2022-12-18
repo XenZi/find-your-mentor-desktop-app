@@ -81,19 +81,51 @@ namespace SR38_2021_POP2022.resources.dao
             {
                 conn.Open();
                 using (SqlCommand cmd =
-                    new SqlCommand("update Session set teacher_id=@teacher_id,session_date=@session_date,session_time=@session_time,session_length=@session_length where id=@id", conn))
+                    new SqlCommand("update Session set teacher_id=@teacher_id,session_date=@session_date,session_time=@session_time,session_length=@session_length,student_id=@student_id,session_status=@session_status where id=@id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@teacher_id", teacher.PersonalIdentityNumber);
                     cmd.Parameters.AddWithValue("@session_date", reservedDate);
                     cmd.Parameters.AddWithValue("@session_time", TimeSpan.Parse("21:00"));
                     cmd.Parameters.AddWithValue("@session_length", classLength);
+                    cmd.Parameters.AddWithValue("@student_id", student?.PersonalIdentityNumber);
+                    cmd.Parameters.AddWithValue("@session_status", status.ToString());
+
                     int rows = cmd.ExecuteNonQuery();
                     conn.Close();
                 }
             }
         }
+        public void Update(Session session)
+        {
+            string studentJMBG = session.Student == null ? null : session.Student.PersonalIdentityNumber;
+            
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("update Session set teacher_id=@teacher_id,session_date=@session_date,session_time=@session_time,session_length=@session_length, student_id=@student_id, session_status=@session_status where id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", session.Id);
+                    cmd.Parameters.AddWithValue("@teacher_id", session.Teacher.PersonalIdentityNumber);
+                    cmd.Parameters.AddWithValue("@session_date", session.ReservedDate);
+                    cmd.Parameters.AddWithValue("@session_time", session.StartingTime);
+                    cmd.Parameters.AddWithValue("@session_length", session.ClassLength);
+                    if (studentJMBG == null)
+                    {
+                        cmd.Parameters.AddWithValue("@student_id", DBNull.Value);
 
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@student_id", session.Student.PersonalIdentityNumber);
+                    }
+                    cmd.Parameters.AddWithValue("@session_status", session.Status.ToString());
+                    int rows = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
         public void Delete(int id)
         {
             Session session = SessionManager.GetInstance().GetSessionById(id);
@@ -107,6 +139,37 @@ namespace SR38_2021_POP2022.resources.dao
                     cmd.Parameters.AddWithValue("@id", id);
                     
                     int rows = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+
+        public void MakeSessionReserved(int sessionID, string studentID)
+        {
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("insert into reserved values(@session_id, @student_id)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@session_id", sessionID);
+                    cmd.Parameters.AddWithValue("@student_id", studentID);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+        }
+
+        public void MakeSessionAvailable(int sessionID)
+        {
+            using (SqlConnection conn = new SqlConnection(DBHandler.connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd =
+                    new SqlCommand("DELETE FROM reserved WHERE session_id=@session_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@session_id", sessionID);
+                    cmd.ExecuteNonQuery();
                     conn.Close();
                 }
             }

@@ -46,3 +46,9 @@ C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resour
 C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Teachers\TeacherWindow.baml
 C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Students\ViewStudentPersonalnfoWindow.g.cs
 C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Students\ViewStudentPersonalnfoWindow.baml
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\ViewUpdatePersonalData.g.cs
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\ViewUpdatePersonalData.baml
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Students\StudentWindow.g.cs
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Students\StudentWindow.baml
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Search\SearchRegisteredUser.g.cs
+C:\Users\rilak\source\repos\SR38-2021-POP2022\SR38-2021-POP2022\obj\Debug\resources\views\Search\SearchRegisteredUser.baml

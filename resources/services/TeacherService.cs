@@ -28,7 +28,8 @@ namespace SR38_2021_POP2022.resources.services
         public void InitializeService()
         {
             FillManager();
-            
+            Console.WriteLine("Teacher Service - Initialized");
+
         }
 
         private void FillManager()
@@ -38,8 +39,9 @@ namespace SR38_2021_POP2022.resources.services
 
         public void InitializeTeacherSessions()
         {
+            Console.WriteLine("SESSIONS ARRAY LENGTH -> ", sessionService.GetAllSessions().Count());
             sessionService.GetAllSessions().ToList().ForEach(session => {
-                Teacher teacher = session.Teacher;
+                Teacher teacher = session?.Teacher;
                 if (teacher != null)
                 {
                     teacher.Sessions.Add(session);

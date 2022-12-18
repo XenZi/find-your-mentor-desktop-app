@@ -14,6 +14,7 @@ namespace SR38_2021_POP2022.resources.models
 
         public Student()
         {
+            this.reservedSessions = new List<Session>();
         }
 
         public Student(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender gender, Address address, bool active, List<Session> reservedClasses) : base(firstName, lastName, personalIdentityNumber, email, password, userType, gender, active, address)

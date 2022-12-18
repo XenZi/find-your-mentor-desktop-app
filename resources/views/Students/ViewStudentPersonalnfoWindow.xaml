@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR38_2021_POP2022.resources.views.Students"
         mc:Ignorable="d"
-        Title="ViewStudentPersonalnfoWindow" Height="460" Width="450">
+        Title="ViewStudentPersonalnfoWindow" Height="500" Width="450">
     <Grid Margin="25 25 25 25">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,14 +20,17 @@
         <ComboBox Name="comboGender" HorizontalAlignment="Left" Margin="13,121,0,0" VerticalAlignment="Top" Width="81" Grid.Row="1" SelectedItem="{Binding Gender}"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="189"/>
         <TextBox Name="txtEmail" HorizontalAlignment="Center" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380" Grid.Row="1" Margin="0,174,0,0"/>
-        <Label Content="Street Address" HorizontalAlignment="Left" Margin="9,211,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Name="txtStreetAddress"  HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="13,242,0,0"/>
-        <Label Content="Street Number" HorizontalAlignment="Left" Margin="201,211,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Name="txtStreetNumber" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="201,242,0,0"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="9,267,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Name="txtCity" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="10,298,0,0"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="201,272,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Name="txtCountry" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="200,298,0,0"/>
-        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="23" Margin="80,341,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="210" Click="btnCancel_Click"/>
+        <Label Content="Street Address" HorizontalAlignment="Left" Margin="9,252,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox Name="txtStreetAddress"  HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="13,283,0,0"/>
+        <Label Content="Street Number" HorizontalAlignment="Left" Margin="201,252,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox Name="txtStreetNumber" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="201,283,0,0"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="9,308,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox Name="txtCity" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="10,339,0,0"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="201,313,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox Name="txtCountry" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" Grid.Row="1" Margin="200,339,0,0"/>
+        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="23" Margin="12,387,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="180" Click="btnCancel_Click"/>
+        <Button Content="Submit" Name="btnSubmit" HorizontalAlignment="Left" Height="23" Margin="201,387,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="189" Click="btnSubmit_Click"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="13,199,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <PasswordBox Name="txtPassword" HorizontalAlignment="Left" Height="22" Margin="13,225,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="377"/>
     </Grid>
 </Window>

@@ -15,6 +15,7 @@ namespace SR38_2021_POP2022.resources.models
         private List<Session> sessions;
         public Teacher()
         {
+           this.sessions = new List<Session>();
         }
 
         public Teacher(string firstName, string lastName, string personalIdentityNumber, string email, string password, EUserType userType, EGender gender, Address address, bool active, School workingSchool, List<Language> teachingLanguages, List<Session> sessions) : base(firstName, lastName, personalIdentityNumber, email, password, userType, gender, active, address)

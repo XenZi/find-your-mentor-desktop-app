@@ -4,6 +4,7 @@ using SR38_2021_POP2022.resources.services;
 using SR38_2021_POP2022.resources.views.Addresses;
 using SR38_2021_POP2022.resources.views.Languages;
 using SR38_2021_POP2022.resources.views.Schools;
+using SR38_2021_POP2022.resources.views.Search;
 using SR38_2021_POP2022.resources.views.Sessions;
 using SR38_2021_POP2022.resources.views.Students;
 using SR38_2021_POP2022.resources.views.Teachers;
@@ -134,6 +135,12 @@ namespace SR38_2021_POP2022.resources.views.Admin
             Teacher teacher = (Teacher)dataTeachers.SelectedItem;
             teacherService.DeleteTeacher(teacher.PersonalIdentityNumber);
             InitializeData();
+        }
+
+        private void btnSearchUsers_Click(object sender, RoutedEventArgs e)
+        {
+            SearchRegisteredUser sru = new SearchRegisteredUser();
+            sru.Show();
         }
     }
 }

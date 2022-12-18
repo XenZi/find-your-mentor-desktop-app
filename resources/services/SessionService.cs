@@ -34,6 +34,37 @@ namespace SR38_2021_POP2022.resources.services
             repository.Read();
         }
 
+        public void MakeSessionAvailable(Session session)
+        {
+            session.Status = EClassStatus.AVAILABLE;
+            session.Student.ReservedSessions.Remove(session);
+            session.Student = null;
+            repository.Update(session);
+            repository.MakeSessionAvailable(session.Id);
+        }
+        public void MakeSessionReserved(Session session, Student student)
+        {
+            session.Student = student;
+            session.Status = EClassStatus.RESERVED;
+            session.Student.ReservedSessions.Add(session);
+            repository.Update(session);
+            repository.MakeSessionReserved(session.Id, student.PersonalIdentityNumber);
+        }
+
+        public ObservableCollection<Session> GetAllAvailableSessionByTeacherID(string id)
+        {
+            return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Teacher.PersonalIdentityNumber == id && session.Status == EClassStatus.AVAILABLE));
+        }
+
+        public ObservableCollection<Session> GetAllReservedSessionsByStudentID(string id)
+        {
+            return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Student?.PersonalIdentityNumber == id));
+        }
+        public ObservableCollection<Session> GetAllAvailableSessions()
+        {
+            return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Active && session.Status == EClassStatus.AVAILABLE).ToList());
+        }
+
         public ObservableCollection<Session> GetSessionsBasedByTeacherIDAndDate(string id, DateTime date)
         {
             return new ObservableCollection<Session>(SessionManager.GetInstance().AllSessions.Where(session => session.Teacher.PersonalIdentityNumber == id && session.ReservedDate.Date == date.Date));

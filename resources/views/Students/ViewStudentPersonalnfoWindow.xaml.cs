@@ -23,12 +23,14 @@ namespace SR38_2021_POP2022.resources.views.Students
     public partial class ViewStudentPersonalnfoWindow : Window
     {
         private Student student;
-
+        private StudentService studentService;
         public ViewStudentPersonalnfoWindow(Student student)
         {
             InitializeComponent();
             this.student = student;
-            comboGender.ItemsSource = Enum.GetNames(typeof(EGender));
+            this.studentService = new StudentService();
+            this.DataContext = student;
+            comboGender.ItemsSource = Enum.GetValues(typeof(EGender));
             InitializeTextBoxValues();
         }
 
@@ -44,6 +46,7 @@ namespace SR38_2021_POP2022.resources.views.Students
             txtStreetAddress.Text = student.Address.Street;
             txtStreetNumber.Text = student.Address.Number.ToString();
             txtCity.Text = student.Address.City;
+            txtPassword.Password = student.Password;
             txtCountry.Text = student.Address.Country;
             comboGender.SelectedIndex = (int) student.Gender;
         }
@@ -52,5 +55,12 @@ namespace SR38_2021_POP2022.resources.views.Students
         {
             this.Close();
         }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            studentService.UpdateStudent(txtFirstName.Text, txtLastName.Text, student.PersonalIdentityNumber, txtEmail.Text, txtPassword.Password, EUserType.Student, (EGender) Enum.Parse(typeof(EGender), comboGender.SelectedValue.ToString()), txtStreetAddress.Text, int.Parse(txtStreetNumber.Text), txtCity.Text, txtCountry.Text);
+            this.Close();
+        }
     }
 }
+ 
