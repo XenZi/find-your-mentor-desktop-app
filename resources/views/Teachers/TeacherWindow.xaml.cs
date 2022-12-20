@@ -1,6 +1,7 @@
 ﻿using SR38_2021_POP2022.resources.enums;
 using SR38_2021_POP2022.resources.models;
 using SR38_2021_POP2022.resources.services;
+using SR38_2021_POP2022.resources.views.Search;
 using SR38_2021_POP2022.resources.views.Sessions;
 using SR38_2021_POP2022.resources.views.Students;
 using System;
@@ -95,5 +96,18 @@ namespace SR38_2021_POP2022.resources.views.Teachers
             vupd.Show();
             dataSessions.ItemsSource = new ObservableCollection<Session>(teacher.Sessions);
          }
+
+        private void btnSearchTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTeacherWindow stw = new SearchTeacherWindow();
+            stw.Show();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow lw = new LoginWindow();
+            lw.Show();
+            this.Close();
+        }
     }
 }

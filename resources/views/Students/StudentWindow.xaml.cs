@@ -1,5 +1,6 @@
 ﻿using SR38_2021_POP2022.resources.models;
 using SR38_2021_POP2022.resources.services;
+using SR38_2021_POP2022.resources.views.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,25 @@ namespace SR38_2021_POP2022.resources.views.Students
         {
             ViewStudentPersonalnfoWindow vspiw = new ViewStudentPersonalnfoWindow(student);
             vspiw.Show();
+        }
+
+        private void btnSearchTeachers_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTeacherWindow stw = new SearchTeacherWindow();
+            stw.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow lw = new LoginWindow();
+            lw.Show();
+            this.Close();
+        }
+
+        private void btnSearchSchools_Click(object sender, RoutedEventArgs e)
+        {
+            GuestWindow gw = new GuestWindow();
+            gw.Show();
         }
     }
 }

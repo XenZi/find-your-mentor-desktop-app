@@ -156,5 +156,10 @@ namespace SR38_2021_POP2022.resources.views.Search
             if (cmbType.SelectedIndex == 0) dataUsers.ItemsSource = students;
             else dataUsers.ItemsSource = teachers;
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

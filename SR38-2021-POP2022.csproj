@@ -107,6 +107,7 @@
     <Compile Include="resources\services\AdminService.cs" />
     <Compile Include="resources\services\LanguageService.cs" />
     <Compile Include="resources\services\SchoolService.cs" />
+    <Compile Include="resources\services\SearchTeacherService.cs" />
     <Compile Include="resources\services\SearchUserService.cs" />
     <Compile Include="resources\services\SessionService.cs" />
     <Compile Include="resources\services\StudentService.cs" />
@@ -143,6 +144,9 @@
     </Compile>
     <Compile Include="resources\views\Search\SearchRegisteredUser.xaml.cs">
       <DependentUpon>SearchRegisteredUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="resources\views\Search\SearchTeacherWindow.xaml.cs">
+      <DependentUpon>SearchTeacherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="resources\views\Sessions\CreateUpdateSession.xaml.cs">
       <DependentUpon>CreateUpdateSession.xaml</DependentUpon>
@@ -184,6 +188,8 @@
     <Compile Include="utilities\file-related-utilities\file-formatters\FileTeacherFormatter.cs" />
     <Compile Include="utilities\file-related-utilities\FileHandler.cs" />
     <Compile Include="utilities\IDGenerator.cs" />
+    <Compile Include="utilities\validations\MailValidation.cs" />
+    <Compile Include="utilities\validations\PersonalIdentityNumberLengthValidation.cs" />
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -237,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\views\Search\SearchRegisteredUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\views\Search\SearchTeacherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,9 +317,7 @@
     <Resource Include="data\txt\students.txt" />
     <Resource Include="data\txt\teachers.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="utilities\validations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="data\txt\admins.txt" />
   </ItemGroup>

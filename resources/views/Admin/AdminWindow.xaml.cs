@@ -142,5 +142,12 @@ namespace SR38_2021_POP2022.resources.views.Admin
             SearchRegisteredUser sru = new SearchRegisteredUser();
             sru.Show();
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow lw = new LoginWindow();
+            lw.Show();
+            this.Close();
+        }
     }
 }

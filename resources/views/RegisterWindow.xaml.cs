@@ -28,8 +28,13 @@ namespace SR38_2021_POP2022.resources.views
         {
             InitializeComponent();
             studentService = new StudentService();
+            this.DataContext = new Student();
         }
 
+        private bool IsValid()
+        {
+            return !Validation.GetHasError(txtEmail) && !Validation.GetHasError(txtPersonalIdentityNumber);
+        }
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (CheckForPersonalIdentityDuplicates.CheckForDuplicates(txtPersonalIdentityNumber.Text))
@@ -37,8 +42,16 @@ namespace SR38_2021_POP2022.resources.views
                 MessageBox.Show($"Personal identity already exists, use your own!");
                 return;
             }
-
-            studentService.CreateStudent(txtFirstName.Text, txtLastName.Text, txtPersonalIdentityNumber.Text, txtEmail.Text, txtPassword.Password, EUserType.Student, (EGender) Enum.Parse(typeof(EGender), comboGender.Text), txtStreetAddress.Text, int.Parse(txtStreetNumber.Text), txtCity.Text, txtCountry.Text);
+            if (IsValid())
+            {
+                studentService.CreateStudent(txtFirstName.Text, txtLastName.Text, txtPersonalIdentityNumber.Text, txtEmail.Text, txtPassword.Password, EUserType.Student, (EGender)Enum.Parse(typeof(EGender), comboGender.Text), txtStreetAddress.Text, int.Parse(txtStreetNumber.Text), txtCity.Text, txtCountry.Text);
+                MessageBox.Show("You have been successfully logged in! Redirecting you to the login window.");
+                LoginWindow lw = new LoginWindow();
+                lw.Show();
+                this.Close();
+                return;
+            }
+            MessageBox.Show("Check up on your errors! Something is wrong!");
         }
     }
 }

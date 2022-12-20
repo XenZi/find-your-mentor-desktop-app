@@ -15,7 +15,10 @@
         <Label Content="My Reserved Classes" HorizontalAlignment="Left" Height="29" Margin="24,94,0,0" VerticalAlignment="Top" Width="150"/>
         <Button Content="Reserve Class" Name="btnReserve"  HorizontalAlignment="Left" Height="29" Margin="400,328,0,0" VerticalAlignment="Top" Width="91" Click="btnReserve_Click"/>
         <Button Content="Cancel Reservation" Name="btnCancel" HorizontalAlignment="Left" Margin="24,328,0,0" VerticalAlignment="Top" Width="120" Height="29" Click="btnCancel_Click"/>
-        <Button Content="View Personal Info" Name="btnViewPersonalInfo" HorizontalAlignment="Left" Height="32" Margin="328,381,0,0" VerticalAlignment="Top" Width="118" Click="btnViewPersonalInfo_Click"/>
+        <Button Content="View Personal Info" Name="btnViewPersonalInfo" HorizontalAlignment="Left" Height="32" Margin="394,388,0,0" VerticalAlignment="Top" Width="118" Click="btnViewPersonalInfo_Click"/>
+        <Button Content="Search Teachers" Name="btnSearchTeachers" HorizontalAlignment="Left" Height="32" Margin="541,388,0,0" VerticalAlignment="Top" Width="101" Click="btnSearchTeachers_Click"/>
+        <Button Content="Logout" HorizontalAlignment="Left" Height="32" Margin="281,388,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click"/>
+        <Button Content="Search Schools" Name="btnSearchSchools" HorizontalAlignment="Left" Height="32" Margin="165,388,0,0" VerticalAlignment="Top" Width="93" Click="btnSearchSchools_Click"/>
 
     </Grid>
 </Window>

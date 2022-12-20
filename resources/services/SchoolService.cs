@@ -46,7 +46,7 @@ namespace SR38_2021_POP2022.resources.services
                     }
                 });
             });
-            return returnableCollection;
+            return new ObservableCollection<School>(returnableCollection.Distinct());
         }
 
         public ObservableCollection<School> GetSchoolsByLanguages(List<Language> languageList)
@@ -62,7 +62,7 @@ namespace SR38_2021_POP2022.resources.services
                     }
                 });
             });
-            return returnableCollection;
+            return new ObservableCollection<School>(returnableCollection.Distinct());
         }
 
         public ObservableCollection<School> GetSchoolByCityName(string name)

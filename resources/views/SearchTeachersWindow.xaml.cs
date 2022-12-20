@@ -35,5 +35,10 @@ namespace SR38_2021_POP2022.resources.views
         {
             dataTeachers.ItemsSource = service.GetTeachersBasedBySchoolID(schoolID);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

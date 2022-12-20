@@ -1,6 +1,7 @@
 ﻿using SR38_2021_POP2022.resources.managers;
 using SR38_2021_POP2022.resources.models;
 using SR38_2021_POP2022.resources.services;
+using SR38_2021_POP2022.resources.views.Search;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,7 +62,6 @@ namespace SR38_2021_POP2022.resources.views
             School clickedSchool = (School)selectedSchool;
             SearchTeachersWindow stw = new SearchTeachersWindow(clickedSchool.Id);
             stw.Show();
-            this.Hide();
         }
 
         private void btnGetBack_Click(object sender, RoutedEventArgs e)
@@ -88,6 +88,12 @@ namespace SR38_2021_POP2022.resources.views
             {
                 dataSchools.ItemsSource = schoolService.GetSchoolsByLanguages(selectedItems); 
             }
+        }
+
+        private void btnSearchForTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTeacherWindow stw = new SearchTeacherWindow();
+            stw.Show();
         }
     }
 }

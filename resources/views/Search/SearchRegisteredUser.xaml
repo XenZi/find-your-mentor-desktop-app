@@ -25,6 +25,6 @@
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="247,262,0,0" VerticalAlignment="Top"/>
         <Label Content="E-mail" HorizontalAlignment="Left" Margin="402,262,0,0" VerticalAlignment="Top"/>
         <Label Content="Type" HorizontalAlignment="Left" Margin="563,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.518,-0.376"/>
-        <Button Content="Search" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="25" Width="78"/>
+        <Button Content="Cancel" Name="btnCancel" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="25" Width="78" Click="btnCancel_Click"/>
     </Grid>
 </Window>
