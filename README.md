@@ -10,3 +10,4 @@ In this application, it was requested to use a Singletton Pattern for storing da
 ![alt text](https://i.imgur.com/XBtGTsD.png)
 ![alt text](https://i.imgur.com/V4wHcjH.png)
 ![alt text](https://i.imgur.com/hurUVUv.png)
+![alt text](https://i.imgur.com/jV2GrVh.png)
